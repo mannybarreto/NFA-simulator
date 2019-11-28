@@ -33,6 +33,6 @@ if __name__ == "__main__":
         if transition is 'DONE':
             break
 
-        entered_transitions.append(transitions)
+        entered_transitions.append(transition)
 
     automata = NFA(start=start_state, accepts=accept_states, transitions=entered_transitions)
