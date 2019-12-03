@@ -33,6 +33,3 @@ class NFA:
                 self.states[split_transition[2]] = State(name = split_transition[2], accept = split_transition[2] in accepts)
 
             self.states[split_transition[0]].add_transition(split_transition[1], self.states[split_transition[2]])
-
-        for state in self.states:
-            print(self.states[state])
