@@ -7,6 +7,8 @@ class State:
         self.accept = accept
     
     def add_transition(self, symbol, transition_state):
+        if symbol not in self.transitions.keys():
+            self.transitions[symbol] = []
         self.transitions[symbol].append(transition_state)
 
 class NFA:
@@ -20,4 +22,8 @@ class NFA:
             else:
                 split_transition = re.split('->', transition)
                 split_transition = (split_transition[0], None, split_transition[1])
-            states[split_transition[0]].add_transition(split_transition[1], split_transition[2])
+            
+            if split_transition[0] not in self.states.keys():
+                self.states[split_transition[0]] = State(name = split_transition[0], accept = split_transition[0] in accepts)
+
+            self.states[split_transition[0]].add_transition(split_transition[1], split_transition[2])
