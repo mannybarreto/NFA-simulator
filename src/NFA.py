@@ -26,10 +26,12 @@ class NFA:
                 split_transition = re.split('->', transition)
                 split_transition = (split_transition[0], None, split_transition[1])
             
-            if split_transition[0] not in self.states.keys():
-                self.states[split_transition[0]] = State(name = split_transition[0], accept = split_transition[0] in accepts)
+            initial_state, symbol, transition_state = split_transition
 
-            if split_transition[2] not in self.states.keys():
-                self.states[split_transition[2]] = State(name = split_transition[2], accept = split_transition[2] in accepts)
+            if initial_state not in self.states.keys():
+                self.states[initial_state] = State(name = initial_state, accept = initial_state in accepts)
 
-            self.states[split_transition[0]].add_transition(split_transition[1], self.states[split_transition[2]])
+            if transition_state not in self.states.keys():
+                self.states[transition_state] = State(name = transition_state, accept = transition_state in accepts)
+
+            self.states[initial_state].add_transition(symbol, self.states[transition_state])
