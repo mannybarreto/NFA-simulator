@@ -25,6 +25,8 @@ if __name__ == "__main__":
         if transition == 'DONE':
             break
 
+        # TODO(mannybarreto): check if transition is properly formatted
+
         entered_transitions.append(transition)
 
     automata = NFA(start=start_state, accepts=accept_states, transitions=entered_transitions)
