@@ -10,6 +10,9 @@ class State:
         if symbol not in self.transitions.keys():
             self.transitions[symbol] = []
         self.transitions[symbol].append(transition_state)
+    
+    def __str__(self):
+        return f'State: {self.name}; Accept?: {self.accept}; Transitions: {self.transitions}'
 
 class NFA:
     def __init__(self, start, accepts, transitions):
@@ -26,4 +29,10 @@ class NFA:
             if split_transition[0] not in self.states.keys():
                 self.states[split_transition[0]] = State(name = split_transition[0], accept = split_transition[0] in accepts)
 
-            self.states[split_transition[0]].add_transition(split_transition[1], split_transition[2])
+            if split_transition[2] not in self.states.keys():
+                self.states[split_transition[2]] = State(name = split_transition[2], accept = split_transition[2] in accepts)
+
+            self.states[split_transition[0]].add_transition(split_transition[1], self.states[split_transition[2]])
+
+        for state in self.states:
+            print(self.states[state])
