@@ -1,3 +1,5 @@
+from NFA import *
+
 if __name__ == "__main__":
     entered_transitions = []
 
@@ -25,4 +27,4 @@ if __name__ == "__main__":
 
         entered_transitions.append(transition)
 
-    # automata = NFA(start=start_state, accepts=accept_states, transitions=entered_transitions)
+    automata = NFA(start=start_state, accepts=accept_states, transitions=entered_transitions)

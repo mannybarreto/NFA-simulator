@@ -11,4 +11,4 @@ class NFA:
     def __init__(self, start, accepts, transitions):
         self.start = State(name = start, accept = start in accepts)
         self.states = {}
-        self.states[start] = self.start[start]
+        self.states[start] = self.start
