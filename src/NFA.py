@@ -11,6 +11,9 @@ class State:
             self.transitions[symbol] = []
         self.transitions[symbol].append(transition_state)
     
+    def get_transitions(self, symbol):
+        return transitions[symbol]
+
     def __str__(self):
         return f'State: {self.name}; Accept?: {self.accept}; Transitions: {self.transitions}'
 
