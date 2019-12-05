@@ -39,7 +39,7 @@ class NFA:
 
             self.states[initial_state].add_transition(symbol, self.states[transition_state])
 
-    def validate_string(self, string, state = None):
+    def validate_string(self, string, state = None, prev_states = []):
         if state is None: state = self.start
         if len(string) is 0 and state.accept: return True
 
@@ -48,7 +48,8 @@ class NFA:
                 return True
 
         for next_state in state.get_transitions(None):
-            if self.validate_string(state=next_state, string=string):
-                return True
+            if next_state not in prev_states:
+                if self.validate_string(state=next_state, string=string, prev_states = prev_states.append(state)):
+                    return True
 
         return False
