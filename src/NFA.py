@@ -7,12 +7,16 @@ class State:
         self.accept = accept
     
     def add_transition(self, symbol, transition_state):
-        if symbol not in self.transitions.keys():
+        if symbol not in self.transitions.keys(): 
             self.transitions[symbol] = []
+
         self.transitions[symbol].append(transition_state)
     
     def get_transitions(self, symbol):
-        return transitions[symbol]
+        if symbol not in self.transitions.keys(): 
+            return []
+        else: 
+            return self.transitions[symbol]
 
     def __str__(self):
         return f'State: {self.name}; Accept?: {self.accept}; Transitions: {self.transitions}'
@@ -41,11 +45,14 @@ class NFA:
 
     def validate_string(self, string, state = None, prev_states = []):
         if state is None: state = self.start
-        if len(string) is 0 and state.accept: return True
 
-        for next_state in state.get_transitions(string[0]):
-            if self.validate_string(state=next_state, string=string[1:]):
-                return True
+        if len(string) is 0:
+            if state.accept: return True
+
+        else:
+            for next_state in state.get_transitions(string[0]):
+                if self.validate_string(state=next_state, string=string[1:]):
+                    return True
 
         for next_state in state.get_transitions(None):
             if next_state not in prev_states:
