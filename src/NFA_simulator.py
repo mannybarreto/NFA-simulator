@@ -1,5 +1,14 @@
 from NFA import *
 
+def validate_transition_input(input):
+    if ':' in input:
+        split = input.split(':')
+        if len(split) != 2:
+            return False
+        input = split[1]
+
+    return len(input.split('->')) == 2
+
 if __name__ == "__main__":
     entered_transitions = []
 
@@ -26,12 +35,14 @@ if __name__ == "__main__":
             break
 
         # TODO(mannybarreto): check if transition is properly formatted
-
-        entered_transitions.append(transition)
+        if validate_transition_input(transition):
+            entered_transitions.append(transition)
+        else:
+            print('Invalid input, try again')
 
     automata = NFA(start=start_state, accepts=accept_states, transitions=entered_transitions)
 
     print('Input string you would like to verify if accepted by given NFA')
-    string_to_verify = input('String:')
+    string_to_verify = input('String: ')
 
     print(f'String is{" " if automata.validate_string(string_to_verify) else " not "}accepted by given automata')
