@@ -34,4 +34,4 @@ if __name__ == "__main__":
     print('Input string you would like to verify if accepted by given NFA')
     string_to_verify = input('String:')
 
-    print(f'String is{automata.validate_string(string_to_verify) ? " " : " not "}accepted by given automata')
+    print(f'String is{" " if automata.validate_string(string_to_verify) else " not "}accepted by given automata')
