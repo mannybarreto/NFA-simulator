@@ -1,4 +1,5 @@
 import re
+import copy
 
 class State:
     def __init__(self, name, accept):
@@ -60,3 +61,9 @@ class NFA:
                     return True
 
         return False
+
+    def get_negation(self):
+        negation = copy.deepcopy(self)
+        for state in negation.states.values():
+            state.accept = not state.accept
+        return negation
